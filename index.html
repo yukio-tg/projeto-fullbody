@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu de Refeições - Planejador Nutricional</title>
+    <link rel="stylesheet" href="style-diet_menu.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🍽️ Planejador Nutricional</h1>
+            <p>Controle suas refeições e macronutrientes diários</p>
+        </div>
+
+        <div class="summary-cards">
+            <div class="summary-card">
+                <h3>Calorias Totais</h3>
+                <div class="summary-value" id="total-calories">0</div>
+                <div class="summary-unit">kcal</div>
+            </div>
+            <div class="summary-card">
+                <h3>Carboidratos</h3>
+                <div class="summary-value" id="total-carbs">0</div>
+                <div class="summary-unit">g</div>
+            </div>
+            <div class="summary-card">
+                <h3>Proteínas</h3>
+                <div class="summary-value" id="total-protein">0</div>
+                <div class="summary-unit">g</div>
+            </div>
+            <div class="summary-card">
+                <h3>Gorduras</h3>
+                <div class="summary-value" id="total-fat">0</div>
+                <div class="summary-unit">g</div>
+            </div>
+        </div>
+
+        <div class="meals-grid">
+            <div class="meal-card">
+                <div class="meal-header">
+                    <div class="meal-title">
+                        <span class="meal-icon">🌅</span>
+                        Café da Manhã
+                    </div>
+                    <div class="meal-targets">
+                        <div class="target-item">
+                            <div class="target-label">Meta Calorias</div>
+                            <div class="target-value">400 kcal</div>
+                        </div>
+                        <div class="target-item">
+                            <div class="target-label">Meta Proteína</div>
+                            <div class="target-value">20g</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="foods-list">
+                    <div class="food-item">
+                        <div class="food-info">
+                            <div class="food-name">Aveia em Flocos</div>
+                            <div class="food-portion">40g</div>
+                            <div class="food-macros">
+                                <span class="macro carbs">Carb: 24g</span>
+                                <span class="macro protein">Prot: 5g</span>
+                                <span class="macro fat">Gord: 3g</span>
+                            </div>
+                        </div>
+                        <div class="food-calories">152 kcal</div>
+                    </div>
+                    <div class="food-item">
+                        <div class="food-info">
+                            <div class="food-name">Banana</div>
+                            <div class="food-portion">1 unidade média (120g)</div>
+                            <div class="food-macros">
+                                <span class="macro carbs">Carb: 27g</span>
+                                <span class="macro protein">Prot: 1g</span>
+                                <span class="macro fat">Gord: 0g</span>
+                            </div>
+                        </div>
+                        <div class="food-calories">105 kcal</div>
+                    </div>
+                    <div class="food-item">
+                        <div class="food-info">
+                            <div class="food-name">Leite Desnatado</div>
+                            <div class="food-portion">200ml</div>
+                            <div class="food-macros">
+                                <span class="macro carbs">Carb: 10g</span>
+                                <span class="macro protein">Prot: 7g</span>
+                                <span class="macro fat">Gord: 0g</span>
+                            </div>
+                        </div>
+                        <div class="food-calories">68 kcal</div>
+                    </div>
+                    <div class="food-item">
+                        <div class="food-info">
+                            <div class="food-name">Mel</div>
+                            <div class="food-portion">1 colher de sopa (20g)</div>
+                            <div class="food-macros">
+                                <span class="macro carbs">Carb: 17g</span>
+                                <span class="macro protein">Prot: 0g</span>
+                                <span class="macro fat">Gord: 0g</span>
+                            </div>
+                        </div>
+                        <div class="food-calories">68 kcal</div>
+                    </div>
+                </div>
+                <div class="meal-totals">
+                    <div class="totals-grid">
+                        <div class="total-item">
+                            <div class="total-label">Calorias</div>
+                            <div class="total-value calories">393g</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill calories" style="width: 100%"></div>
+                            </div>
+                        </div>
+                        <div class="total-item">
+                            <div class="total-label">Carb</div>
+                            <div class="total-value carbs">78g</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill carbs" style="width: 100%"></div>
+                            </div>
+                        </div>
+                        <div class="total-item">
+                            <div class="total-label">Prot</div>
+                            <div class="total-value protein">13g</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill protein" style="width: 100%"></div>
+                            </div>
+                        </div>
+                        <div class="total-item">
+                            <div class="total-label">Gord</div>
+                            <div class="total-value fat">3g</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill fat" style="width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="add-food-btn">+ Adicionar Alimento</button>
+                </div>
+            </div>
+
+            <div class="meal-card">
+                <div class="meal-header">
+                    <div class="meal-title">
+                        <span class="meal-icon">🍽️</span>
+                        Almoço
+                    </div>
+                    <div class="meal-targets">
+                        <div class="target-item">
+                            <div class="target-label">Meta Calorias</div>
+                            <div class="target-value">650 kcal</div>
+                        </div>
+                        <div class="target-item">
+                            <div class="target-label">Meta Proteína</div>
+                            <div class="target-value">35g</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="foods-list">
+                    <div class="food-item">
+                        <div class="food-info">
+                            <div class="food-name">Arroz Branco Cozido</div>
+                            <div class="food-portion">100g</div>
+                            <div class="food-macros">
+                                <span class="macro carbs">Carb: 28g</span>
+                                <span class="macro protein">Prot: 3g</span>
+                                <span class="macro fat">Gord: 0g</span>
+                            </div>
+                        </div>
+                        <div class="food-calories">130 kcal</div>
+                    </div>
+                    <div class="food-item">
+                        <div class="food-info">
+                            <div class="food-name">Feijão Carioca</div>
+                            <div class="food-portion">80g</div>
+                            <div class="food-macros">
+                                <span class="macro carbs">Carb: 14g</span>
+                                <span class="macro protein">Prot: 6g</span>
+                                <span class="macro fat">Gord: 1g</span>
+                            </div>
+                        </div>
+                        <div class="food-calories">84 kcal</div>
+                    </div>
+                    <div class="food-item">
+                        <div class="food-info">
+                            <div class="food-name">Peito de Frango Grelhado</div>
+                            <div class="food-portion">120g</div>
+                            <div class="food-macros">
+                                <span class="macro carbs">Carb: 0g</span>
+                                <span class="macro protein">Prot: 31g</span>
+                                <span class="macro fat">Gord: 4g</span>
+                            </div>
+                        </div>
+                        <div class="food-calories">165 kcal</div>
+                    </div>
+                    <div class="food-item">
+                        <div class="food-info">
+                            <div class="food-name">Salada Mista</div>
+                            <div class="food-portion">100g</div>
+                            <div class="food-macros">
+                                <span class="macro carbs">Carb: 4g</span>
+                                <span class="macro protein">Prot: 2g</span>
+                                <span class="macro fat">Gord: 0g</span>
+                            </div>
+                        </div>
+                        <div class="food-calories">25 kcal</div>
+                    </div>
+                    <div class="food-item">
+                        <div class="food-info">
+                            <div class="food-name">Azeite Extra Virgem</div>
+                            <div class="food-portion">1 colher de sopa (15ml)</div>
+                            <div class="food-macros">
+                                <span class="macro carbs">Carb: 0g</span>
+                                <span class="macro protein">Prot: 0g</span>
+                                <span class="macro fat">Gord: 14g</span>
+                            </div>
+                        </div>
+                        <div class="food-calories">126 kcal</div>
+                    </div>
+                </div>
+                <div class="meal-totals">
+                    <div class="totals-grid">
+                        <div class="total-item">
+                            <div class="total-label">Calorias</div>
+                            <div class="total-value calories">530g</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill calories" style="width: 100%"></div>
+                            </div>
+                        </div>
+                        <div class="total-item">
+                            <div class="total-label">Carb</div>
+                            <div class="total-value carbs">46g</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill carbs" style="width: 100%"></div>
+                            </div>
+                        </div>
+                        <div class="total-item">
+                            <div class="total-label">Prot</div>
+                            <div class="total-value protein">42g</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill protein" style="width: 100%"></div>
+                            </div>
+                        </div>
+                        <div class="total-item">
+                            <div class="total-label">Gord</div>
+                            <div class="total-value fat">19g</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill fat" style="width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="add-food-btn">+ Adicionar Alimento</button>
+                </div>
+            </div>
+
+            <div class="meal-card">
+                <div class="meal-header">
+                    <div class="meal-title">
+                        <span class="meal-icon">☕</span>
+                        Café da Tarde
+                    </div>
+                    <div class="meal-targets">
+                        <div class="target-item">
+                            <div class="target-label">Meta Calorias</div>
+                            <div class="target-value">200 kcal</div>
+                        </div>
+                        <div class="target-item">
+                            <div class="target-label">Meta Proteína</div>
+                            <div class="target-value">10g</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="foods-list">
+                    <div class="food-item">
+                        <div class="food-info">
+                            <div class="food-name">Iogurte Grego Natural</div>
+                            <div class="food-portion">150g</div>
+                            <div class="food-macros">
+                                <span class="macro carbs">Carb: 6g</span>
+                                <span class="macro protein">Prot: 15g</span>
+                                <span class="macro fat">Gord: 9g</span>
+                            </div>
+                        </div>
+                        <div class="food-calories">146 kcal</div>
+                    </div>
+                    <div class="food-item">
+                        <div class="food-info">
+                            <div class="food-name">Castanha do Brasil</div>
+                            <div class="food-portion">10g (2 unidades)</div>
+                            <div class="food-macros">
+                                <span class="macro carbs">Carb: 1g</span>
+                                <span class="macro protein">Prot: 1g</span>
+                                <span class="macro fat">Gord: 7g</span>
+                            </div>
+                        </div>
+                        <div class="food-calories">66 kcal</div>
+                    </div>
+                </div>
+                <div class="meal-totals">
+                    <div class="totals-grid">
+                        <div class="total-item">
+                            <div class="total-label">Calorias</div>
+                            <div class="total-value calories">212</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill calories" style="width: 100%"></div>
+                            </div>
+                        </div>
+                        <div class="total-item">
+                            <div class="total-label">Carb</div>
+                            <div class="total-value carbs">7g</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill carbs" style="width: 100%"></div>
+                            </div>
+                        </div>
+                        <div class="total-item">
+                            <div class="total-label">Prot</div>
+                            <div class="total-value protein">16g</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill protein" style="width: 100%"></div>
+                            </div>
+                        </div>
+                        <div class="total-item">
+                            <div class="total-label">Gord</div>
+                            <div class="total-value fat">16g</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill fat" style="width: 100%"></div>
+                            </div>
+                        </div>
+                    <button class="add-food-btn">+ Adicionar Alimento</button>
+                </div>
+            </div>
+
+            <div class="meal-card">
+                <div class="meal-header">
+                    <div class="meal-title">
+                        <span class="meal-icon">🌙</span>
+                        Janta
+                    </div>
+                    <div class="meal-targets">
+                        <div class="target-item">
+                            <div class="target-label">Meta Calorias</div>
+                            <div class="target-value">550 kcal</div>
+                        </div>
+                        <div class="target-item">
+                            <div class="target-label">Meta Proteína</div>
+                            <div class="target-value">30g</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="foods-list">
+                    <div class="food-item">
+                        <div class="food-info">
+                            <div class="food-name">Batata Doce Assada</div>
+                            <div class="food-portion">150g</div>
+                            <div class="food-macros">
+                                <span class="macro carbs">Carb: 30g</span>
+                                <span class="macro protein">Prot: 3g</span>
+                                <span class="macro fat">Gord: 0g</span>
+                            </div>
+                        </div>
+                        <div class="food-calories">129 kcal</div>
+                    </div>
+                    <div class="food-item">
+                        <div class="food-info">
+                            <div class="food-name">Salmão Grelhado</div>
+                            <div class="food-portion">120g</div>
+                            <div class="food-macros">
+                                <span class="macro carbs">Carb: 0g</span>
+                                <span class="macro protein">Prot: 28g</span>
+                                <span class="macro fat">Gord: 13g</span>
+                            </div>
+                        </div>
+                        <div class="food-calories">206 kcal</div>
+                    </div>
+                    <div class="food-item">
+                        <div class="food-info">
+                            <div class="food-name">Brócolis Refogado</div>
+                            <div class="food-portion">100g</div>
+                            <div class="food-macros">
+                                <span class="macro carbs">Carb: 4g</span>
+                                <span class="macro protein">Prot: 3g</span>
+                                <span class="macro fat">Gord: 3g</span>
+                            </div>
+                        </div>
+                        <div class="food-calories">45 kcal</div>
+                    </div>
+                    <div class="food-item">
+                        <div class="food-info">
+                            <div class="food-name">Quinoa Cozida</div>
+                            <div class="food-portion">80g</div>
+                            <div class="food-macros">
+                                <span class="macro carbs">Carb: 17g</span>
+                                <span class="macro protein">Prot: 4g</span>
+                                <span class="macro fat">Gord: 2g</span>
+                            </div>
+                        </div>
+                        <div class="food-calories">96 kcal</div>
+                    </div>
+                </div>
+                <div class="meal-totals">
+                    <div class="totals-grid">
+                        <div class="total-item">
+                            <div class="total-label">Calorias</div>
+                            <div class="total-value calories">476</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill calories" style="width: 87%"></div>
+                            </div>
+                        </div>
+                        <div class="total-item">
+                            <div class="total-label">Carb</div>
+                            <div class="total-value carbs">51g</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill carbs" style="width: 100%"></div>
+                            </div>
+                        </div>
+                        <div class="total-item">
+                            <div class="total-label">Prot</div>
+                            <div class="total-value protein">38g</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill protein" style="width: 100%"></div>
+                            </div>
+                        </div>
+                        <div class="total-item">
+                            <div class="total-label">Gord</div>
+                            <div class="total-value fat">18g</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill fat" style="width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="add-food-btn">+ Adicionar Alimento</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Calcular totais automaticamente
+        function calculateTotals() {
+            const meals = [
+                { calories: 393, carbs: 78, protein: 13, fat: 3 },
+                { calories: 530, carbs: 46, protein: 42, fat: 19 },
+                { calories: 212, carbs: 7, protein: 16, fat: 16 },
+                { calories: 476, carbs: 51, protein: 38, fat: 18 }
+            ];
+
+            const totals = meals.reduce((acc, meal) => {
+                acc.calories += meal.calories;
+                acc.carbs += meal.carbs;
+                acc.protein += meal.protein;
+                acc.fat += meal.fat;
+                return acc;
+            }, { calories: 0, carbs: 0, protein: 0, fat: 0 });
+
+            document.getElementById('total-calories').textContent = totals.calories;
+            document.getElementById('total-carbs').textContent = totals.carbs;
+            document.getElementById('total-protein').textContent = totals.protein;
+            document.getElementById('total-fat').textContent = totals.fat;
+        }
+
+        // Adicionar funcional
