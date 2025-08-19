@@ -1,0 +1,164 @@
+:root {
+    /* Cores principais - Modo Noturno */
+    --primary-color: #6a8dff;
+    --primary-dark: #5a7ce6;
+    --primary-darker: #4a6bcc;
+    --secondary-color: #1a1f2d;
+    --accent-color: #8a6bff;
+    --gradient-bg: black;
+    --header-gradient: linear-gradient(135deg, var(--secondary-color), #2c3e50);
+    
+    /* Cores de texto - Modo Noturno */
+    --text-primary: #e0e0e0;
+    --text-secondary: #f0f0f0;
+    --text-light: #a0a0a0;
+    --text-white: #ffffff;
+    
+    /* Cores de macros */
+    --carbs-color: #6b8cff;
+    --protein-color: #ff6b6b;
+    --fat-color: #ffb86b;
+    --calories-color: #6bff8c;
+    
+    /* Cores de fundo - Modo Noturno */
+    --bg-white: #1e1e1e;
+    --bg-light: #252525;
+    --bg-light-green: rgb(26, 65, 26);
+    --bg-lighter: #2d2d2d;
+    --bg-gradient-light: linear-gradient(135deg, #252525, #1e1e1e);
+    
+    /* Sombras - Mais escuras para contraste */
+    --shadow-sm: 0 5px 15px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.25);
+    --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.2);
+    
+    /* Bordas */
+    --border-radius-sm: 8px;
+    --border-radius-md: 15px;
+    --border-radius-lg: 20px;
+    --border-color: #333333;
+    
+    /* Espaçamentos (mantidos os mesmos) */
+    --space-xs: 5px;
+    --space-sm: 10px;
+    --space-md: 15px;
+    --space-lg: 20px;
+    --space-xl: 25px;
+    --space-xxl: 30px;
+    
+    /* Tamanhos de fonte (mantidos os mesmos) */
+    --text-xs: 0.8rem;
+    --text-sm: 0.9rem;
+    --text-md: 1rem;
+    --text-lg: 1.1rem;
+    --text-xl: 1.2rem;
+    --text-xxl: 1.4rem;
+    --text-xxxl: 1.5rem;
+    --text-display: 2.5rem;
+    
+    /* Outros */
+    --max-width: 1400px;
+    --card-min-width: 200px;
+    --meal-card-min-width: 320px;
+    --blur-effect: blur(10px);
+    --transition: all 0.3s ease;
+    --size-return-box: 50px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--gradient-bg);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+header {
+    background: var(--bg-light-green);
+    color: var(--text-white);
+    text-align: center;
+    height: 15vh;
+    box-shadow: var(--shadow-md);
+    padding: var(--space-md);
+    display: flex;
+}
+
+header div.voltar{
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    cursor: pointer;
+    border-right: 1px solid white;
+    padding: 0 10px;
+}
+
+header div.voltar span {
+    align-self: center;
+    font-size: var(--text-xxxl);
+    font-weight: bold;
+    background-color: #142b17;
+    border-radius: 50%;
+    padding: 20px 15px 20px 25px;
+}
+
+header div.voltar span:hover {
+    transition: var(--transition);
+    align-self: center;
+    font-size: var(--text-xxxl);
+    font-weight: bold;
+    background-color: #0b110c;
+    border-radius: 50%;
+    padding: 20px 15px 20px 25px;
+    text-shadow: 0px 0px 2px rgb(255, 255, 255);
+}
+
+div.bloco-lado{
+    text-align: center;
+    align-self: center;
+    margin: 0 20px;
+}
+
+div.bloco-lado h1 {
+    font-size: var(--text-display);
+    margin-bottom: 0;
+}
+
+div.bloco-lado p.subtitulo {
+    margin-top: 0;
+    font-size: var(--text-sm);
+    color: var(--text-light);
+    font-style: italic;
+}
+
+header div.data{
+    margin: auto 10px auto auto;
+    align-items: center;
+    width: 200px;
+}
+
+header p.status{
+    font-weight: bold;
+}
+
+header p.data {
+    font-size: var(--text-sm);
+    color: var(--text-light);
+}
+
+section.exercise{
+    height: 180px;
+    background: var(--bg-white);
+    color: var(--text-primary);
+    padding: var(--space-md);
+    margin: var(--space-lg) auto;
+    display: flex;
+    border-radius: var(--border-radius-md);
+    border: 1px solid black;
+    cursor: pointer;
+}
