@@ -1,4 +1,11 @@
 :root {
+    /* Device Screensize */
+    --width-mobile: 480px;
+    --width-tablet: 768px;
+    --width-laptop: 1024px;
+    --width-desktop: 1200px;
+    --width-actual: var(--width-mobile);
+    
     /* Cores principais - Modo Noturno */
     --primary-color: #6a8dff;
     --primary-dark: #5a7ce6;
@@ -7,6 +14,11 @@
     --accent-color: #8a6bff;
     --gradient-bg: black;
     --header-gradient: linear-gradient(135deg, var(--secondary-color), #2c3e50);
+    /* Novas cores para o gradiente verde */
+            --green-gradient-1: #1a5f2a;
+            --green-gradient-2: #006115;
+            --green-gradient-3: #083111;
+            --green-gradient-4: #0e270c;
     
     /* Cores de texto - Modo Noturno */
     --text-primary: #e0e0e0;
@@ -54,7 +66,7 @@
     --text-xl: 1.2rem;
     --text-xxl: 1.4rem;
     --text-xxxl: 1.5rem;
-    --text-display: 2.5rem;
+    --text-display: 2rem;
     
     /* Outros */
     --max-width: 1400px;
@@ -69,38 +81,60 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    text-decoration: none;
+    color: white;
 }
 
-body {
+body{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: var(--gradient-bg);
+    background: black;
     color: var(--text-primary);
     line-height: 1.6;
     min-height: 100vh;
 }
 
-header {
-    background: var(--bg-light-green);
-    color: var(--text-white);
-    text-align: center;
-    height: 15vh;
-    box-shadow: var(--shadow-md);
-    padding: var(--space-md);
-    display: flex;
+div.fundo{
+    margin: auto;
+    max-width: var(--width-actual);
+    background: black;
 }
 
+main{
+    min-width: calc(var(--width-actual)-30px);
+    align-items: center;
+}
+
+header {
+            background: linear-gradient(135deg, 
+                var(--green-gradient-1) 0%, 
+                var(--green-gradient-2) 30%, 
+                var(--green-gradient-3) 70%, 
+                var(--green-gradient-4) 100%);
+            text-align: center;
+            height: 15vh;
+            min-height: 100px;
+            min-width: var(--width-actual);
+            box-shadow: var(--shadow-md);
+            padding: var(--space-md);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            position: sticky; /* Torna o header fixo */
+            top: 0;
+            z-index: 1000; /* Garante que o header fique acima de outros elementos */
+        }
 header div.voltar{
     display: flex;
     align-items: center;
     gap: var(--space-sm);
     cursor: pointer;
-    border-right: 1px solid white;
     padding: 0 10px;
 }
 
 header div.voltar span {
     align-self: center;
-    font-size: var(--text-xxxl);
+    font-size: var(--text-xxl);
     font-weight: bold;
     background-color: #142b17;
     border-radius: 50%;
@@ -110,7 +144,7 @@ header div.voltar span {
 header div.voltar span:hover {
     transition: var(--transition);
     align-self: center;
-    font-size: var(--text-xxxl);
+    font-size: var(--text-xxl);
     font-weight: bold;
     background-color: #0b110c;
     border-radius: 50%;
@@ -121,12 +155,13 @@ header div.voltar span:hover {
 div.bloco-lado{
     text-align: center;
     align-self: center;
-    margin: 0 20px;
+    margin: auto;
 }
 
 div.bloco-lado h1 {
     font-size: var(--text-display);
     margin-bottom: 0;
+    text-shadow: 0 0 2px rgba(255, 255, 255, 0.5);
 }
 
 div.bloco-lado p.subtitulo {
@@ -142,6 +177,13 @@ header div.data{
     width: 200px;
 }
 
+div.data{
+    background-color: #13271680;
+    border-radius: var(--border-radius-md);
+    box-shadow: inset 0 0 3px #000000;
+    padding: var(--space-sm);
+}
+
 header p.status{
     font-weight: bold;
 }
@@ -151,14 +193,168 @@ header p.data {
     color: var(--text-light);
 }
 
-section.exercise{
-    height: 180px;
-    background: var(--bg-white);
-    color: var(--text-primary);
-    padding: var(--space-md);
+main{
+    max-width: 590px;
     margin: var(--space-lg) auto;
-    display: flex;
-    border-radius: var(--border-radius-md);
-    border: 1px solid black;
-    cursor: pointer;
 }
+
+section.exercise {
+            background: var(--bg-white);
+            color: var(--text-primary);
+            padding: var(--space-md);
+            margin: var(--space-lg) auto;
+            border-radius: var(--border-radius-md);
+            border: 1px solid var(--border-color);
+            max-width: 800px;
+        }
+
+        /* Top Div - Exercise Info */
+        .exercise-top {
+            display: flex;
+            align-items: center;
+            padding-bottom: var(--space-md);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .checkbox-space {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-white);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--text-xxl);
+            box-shadow: inset var(--shadow-sm);
+            margin-right: var(--space-md);
+            flex-shrink: 0;
+            border: 2px solid white;
+        }
+
+        .checkbox-space:hover {
+            box-shadow: 0 0 2px rgba(255, 255, 255, 0.7);
+            background-color: rgba(3, 100, 27, 0.3);
+            transition: var(--transition);
+        }
+
+        section.exercise img {
+            background-color: var(--primary-color);
+            color: var(--text-white);
+            border-radius: 10%;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--text-xxl);
+            margin-right: var(--space-md);
+            object-fit: cover;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+            box-shadow: var(--shadow-sm);
+            flex-shrink: 0;
+        }
+
+        .exercise-info {
+            flex-grow: 1;
+        }
+
+        .exercise-info h1 {
+            font-size: var(--text-xl);
+            margin-bottom: var(--space-xs);
+            color: var(--text-secondary);
+        }
+
+        /* Bottom Div - Reps Sections */
+        .exercise-bottom {
+            padding-top: var(--space-md);
+        }
+
+        div.reps-sections {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: var(--space-sm);
+            color: var(--text-primary);
+            border-radius: var(--border-radius-sm);
+        }
+
+        div.rep {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background: var(--bg-lighter);
+            border-radius: var(--border-radius-sm);
+            height: 50px;
+        }
+
+        div.rep:hover{
+            background-color: #333333;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        div.icon{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+        }
+
+        div.icon:hover{
+            box-shadow: 0 0 2px rgba(13, 136, 34, 0.329);
+            background-color: rgba(0, 255, 42, 0.082);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        div.icon svg{
+            color: var(--text-light);
+        }
+
+        div.item{
+            cursor:text
+        }
+
+        div.item h2 {
+            font-size: var(--text-md);
+            color: var(--text-light);
+            text-align: center;
+            border-radius: 5%;
+            padding: 0 10px;
+            flex: 1;
+        }
+
+        div.rep h2:hover{
+            color: var(--text-white);
+            transition: var(--transition);
+            background-color: #1a1f2d94;
+            font-size: var(--text-lg);
+            border-radius: 10%;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .exercise-top {
+                flex-wrap: wrap;
+            }
+            
+            .exercise-info {
+                width: 100%;
+                margin-top: var(--space-md);
+            }
+            
+            div.rep {
+                flex-direction: column;
+                gap: var(--space-xs);
+            }
+            
+            section.exercise img {
+                width: 60px;
+                height: 60px;
+            }
+        }

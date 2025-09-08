@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Div Creation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #6a8dff;
+            text-shadow: 0 0 10px rgba(106, 141, 255, 0.7);
+        }
+        
+        .explanation {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .div-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .first-div {
+            background: linear-gradient(135deg, #6a8dff, #8a6bff);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(106, 141, 255, 0.5);
+        }
+        
+        .first-div:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(106, 141, 255, 0.6);
+        }
+        
+        .second-div {
+            background: linear-gradient(135deg, #8a6bff, #ff6b6b);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            display: none;
+            animation: fadeIn 0.5s ease forwards;
+            box-shadow: 0 5px 15px rgba(138, 107, 255, 0.5);
+        }
+        
+        .code-container {
+            background: #2d2d3d;
+            border-radius: 10px;
+            padding: 20px;
+            overflow-x: auto;
+            margin-top: 30px;
+        }
+        
+        .code-container pre {
+            color: #ffc801;
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #6bff8c, #6b8cff);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            display: block;
+            margin: 20px auto 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(107, 255, 140, 0.4);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(107, 255, 140, 0.6);
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Dynamic Div Creation</h1>
+        
+        <div class="explanation">
+            <p>Click on the first div to create and display the second div. This demonstrates how to use JavaScript to dynamically create and manipulate elements in the DOM.</p>
+        </div>
+        
+        <div class="div-container">
+            <div class="first-div" id="firstDiv">
+                <h2>First Div</h2>
+                <p>Click me to create the second div!</p>
+            </div>
+            
+            <div id="secondDivContainer">
+                <!-- Second div will be created here -->
+            </div>
+        </div>
+        
+        <div class="code-container">
+            <h3>How it works:</h3>
+            <pre>
+// Get references to the DOM elements
+const firstDiv = document.getElementById('firstDiv');
+const secondDivContainer = document.getElementById('secondDivContainer');
+
+// Add click event listener to the first div
+firstDiv.addEventListener('click', function() {
+    // Create the second div
+    const secondDiv = document.createElement('div');
+    secondDiv.className = 'second-div';
+    secondDiv.innerHTML = `
+        <h2>Second Div</h2>
+        <p>I was created by the first div!</p>
+        <p>Click the reset button to remove me.</p>
+    `;
+    
+    // Add the second div to the container
+    secondDivContainer.appendChild(secondDiv);
+    
+    // Show the second div with animation
+    setTimeout(() => {
+        secondDiv.style.display = 'block';
+    }, 10);
+});
+
+// Reset button functionality
+function resetSecondDiv() {
+    secondDivContainer.innerHTML = '';
+}
+            </pre>
+        </div>
+        
+        <button class="btn" onclick="resetSecondDiv()">Reset Second Div</button>
+    </div>
+
+    <script>
+        // Get references to the DOM elements
+        const firstDiv = document.getElementById('firstDiv');
+        const secondDivContainer = document.getElementById('secondDivContainer');
+        
+        // Add click event listener to the first div
+        firstDiv.addEventListener('click', function() {
+            // Create the second div
+            const secondDiv = document.createElement('div');
+            secondDiv.className = 'second-div';
+            secondDiv.innerHTML = `
+                <h2>Second Div</h2>
+                <p>I was created by the first div!</p>
+                <p>Click the reset button to remove me.</p>
+            `;
+            
+            // Add the second div to the container
+            secondDivContainer.appendChild(secondDiv);
+            
+            // Show the second div with animation
+            setTimeout(() => {
+                secondDiv.style.display = 'block';
+            }, 10);
+        });
+        
+        // Reset button functionality
+        function resetSecondDiv() {
+            secondDivContainer.innerHTML = '';
+        }
+    </script>
+</body>
+</html>
