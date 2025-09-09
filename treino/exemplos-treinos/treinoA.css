@@ -358,3 +358,7 @@ section.exercise {
                 height: 60px;
             }
         }
+
+        a a:visited a:hover a:active a:focus {
+            color: white;
+        }
