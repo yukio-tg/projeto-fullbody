@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat App com Imagens</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        :root {
+            /* Cores principais - Esquema Vermelho/Cinza */
+            --primary-color: #c7403e;
+            --primary-light: #e7504d;
+            --primary-dark: #a72f2d;
+            --secondary-color: #2c2c2e;
+            --secondary-light: #3c3c3e;
+            --secondary-dark: #1c1c1e;
+            
+            /* Cores de texto */
+            --text-primary: #f5f5f5;
+            --text-secondary: #e0e0e0;
+            --text-light: #b0b0b0;
+            --text-white: #ffffff;
+            
+            /* Cores de fundo */
+            --bg-primary: #121212;
+            --bg-secondary: #1e1e1e;
+            --bg-surface: #2c2c2e;
+            
+            /* Sombras */
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+            
+            /* Bordas */
+            --border-radius-sm: 8px;
+            --border-radius-md: 12px;
+            --border-radius-lg: 18px;
+            --border-radius-xl: 24px;
+            --border-color: #404040;
+            
+            /* Espaçamentos */
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 12px;
+            --space-lg: 16px;
+            --space-xl: 20px;
+            --space-xxl: 24px;
+            
+            /* Tamanhos de fonte */
+            --text-xs: 0.75rem;
+            --text-sm: 0.875rem;
+            --text-md: 1rem;
+            --text-lg: 1.125rem;
+            --text-xl: 1.25rem;
+            --text-xxl: 1.5rem;
+            
+            /* Outros */
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+
+        div.fundo {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            max-width: 100%;
+            background: var(--bg-primary);
+            position: relative;
+        }
+
+        /* Header */
+        .header {
+            background: var(--secondary-color);
+            color: var(--text-white);
+            padding: var(--space-md) var(--space-lg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+            box-shadow: var(--shadow-sm);
+            height: 60px;
+            z-index: 100;
+        }
+
+        .header-title {
+            font-size: var(--text-lg);
+            font-weight: 600;
+        }
+
+        .header-btn {
+            background: none;
+            border: none;
+            color: var(--text-white);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-xs);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .header-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Área de conversa - CORRIGIDA para scroll */
+        .chat-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: var(--space-lg);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+            /* Garantir que o scroll funcione */
+            min-height: 0;
+        }
+
+        /* Balões de mensagem */
+        .message {
+            max-width: 80%;
+            padding: var(--space-md);
+            border-radius: var(--border-radius-lg);
+            position: relative;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .message.received {
+            align-self: flex-start;
+            background: var(--secondary-light);
+            border-bottom-left-radius: var(--space-xs);
+        }
+
+        .message.sent {
+            align-self: flex-end;
+            background: var(--primary-color);
+            border-bottom-right-radius: var(--space-xs);
+        }
+
+        .message-content {
+            margin-bottom: var(--space-xs);
+            word-wrap: break-word;
+        }
+
+        .message-time {
+            font-size: var(--text-xs);
+            color: var(--text-light);
+            text-align: right;
+        }
+
+        /* Estilos para mensagens com imagem */
+        .message-image {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: var(--border-radius-md);
+            margin-bottom: var(--space-xs);
+            display: block;
+            object-fit: cover;
+            margin-left: auto;
+            margin-right: auto;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            z-index: 1;
+            cursor: pointer;
+        }
+
+        .message-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px 10px rgba(0,0,0,0.7);
+            z-index: 999;
+            position: relative;
+        }
+
+        .message-image:hover::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.7);
+            z-index: 998;
+            pointer-events: none;
+        }
+
+        .image-caption {
+            font-size: var(--text-sm);
+            color: var(--text-light);
+            margin-top: var(--space-xs);
+            font-style: italic;
+            padding: 0 var(--space-xs);
+        }
+
+        /* Área de entrada de mensagem */
+        .input-container {
+            position: sticky;
+            background: var(--secondary-color);
+            padding: var(--space-md);
+            display: flex;
+            gap: var(--space-md);
+            box-shadow: var(--shadow-md);
+            z-index: 90;
+            flex-shrink: 0;
+            border-radius: 20px;
+        }
+
+        .message-input {
+            flex: 1;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-xl);
+            padding: var(--space-md);
+            color: var(--text-primary);
+            font-size: var(--text-md);
+            outline: none;
+        }
+
+        .message-input:focus {
+            border-color: var(--primary-light);
+        }
+
+        .send-btn {
+            background: var(--primary-color);
+            color: var(--text-white);
+            border: none;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .send-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+        }
+
+        /* Painel de informações */
+        .info-panel {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 100%;
+            background: var(--secondary-color);
+            z-index: 200;
+            padding: var(--space-xl);
+            box-shadow: var(--shadow-lg);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            transform: translateX(100%);
+            opacity: 0;
+            visibility: hidden;
+            overflow-y: auto;
+        }
+
+        .info-panel.active {
+            transform: translateX(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .info-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-xl);
+        }
+
+        .info-title {
+            font-size: var(--text-xl);
+            font-weight: 600;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: var(--text-white);
+            cursor: pointer;
+            font-size: var(--text-xl);
+        }
+
+        .group-info {
+            margin-bottom: var(--space-xl);
+        }
+
+        .group-name {
+            font-size: var(--text-lg);
+            font-weight: 600;
+            margin-bottom: var(--space-md);
+        }
+
+        /* Nova seção de prêmio */
+        .premio-section {
+            background: linear-gradient(135deg, #ffcc00 0%, #ff9900 100%);
+            color: #2c2c2e;
+            padding: var(--space-lg);
+            border-radius: var(--border-radius-md);
+            margin-bottom: var(--space-xl);
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .premio-section::before {
+            content: "🏆";
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            font-size: 60px;
+            opacity: 0.2;
+            transform: rotate(15deg);
+        }
+
+        .premio-title {
+            font-size: var(--text-lg);
+            font-weight: 700;
+            margin-bottom: var(--space-md);
+            color: #2c2c2e;
+        }
+
+        .premio-desc {
+            font-size: var(--text-sm);
+            line-height: 1.4;
+            color: #2c2c2e;
+        }
+
+        .premio-valor {
+            display: inline-block;
+            background-color: #c7403e;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-weight: 700;
+            margin-top: var(--space-sm);
+        }
+
+        .participants-list {
+            list-style: none;
+        }
+
+        .participant-item {
+            padding: var(--space-md) 0;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--space-md);
+        }
+
+        .participant-info {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .participant-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        .participant-name {
+            font-size: var(--text-md);
+        }
+
+        .participant-points {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: var(--text-sm);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .participant-points::before {
+            content: "🔥";
+            font-size: var(--text-sm);
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 150;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* Animações */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Personalização da scrollbar */
+        .chat-container::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-container::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+
+        .chat-container::-webkit-scrollbar-thumb {
+            background: var(--secondary-light);
+            border-radius: 3px;
+        }
+
+        .chat-container::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-color);
+        }
+
+        .info-panel::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .info-panel::-webkit-scrollbar-track {
+            background: var(--secondary-dark);
+        }
+
+        .info-panel::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 3px;
+        }
+
+        /* Responsividade */
+        @media (max-width: 480px) {
+            .message {
+                max-width: 90%;
+            }
+            
+            .info-panel {
+                width: 85%;
+            }
+            
+            .message-image {
+                max-height: 250px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            div.fundo {
+                max-width: 500px;
+                margin: 0 auto;
+                box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="fundo">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-title">Grupo da Classe</div>
+            <button class="header-btn" id="info-btn">
+                <span class="material-symbols-outlined">info</span>
+            </button>
+        </div>
+        
+        <!-- Área de conversa -->
+        <div class="chat-container">
+            <div class="message received">
+                <div class="message-content">Eae gente tá rolando?? Foram hojee??</div>
+                <div class="message-time">10:15</div>
+            </div>
+            
+            <div class="message sent">
+                <div class="message-content">Perfeitamente meu queridao👍👍</div>
+                <div class="message-time">10:17</div>
+            </div>
+            
+            <div class="message received">
+                <div class="message-content">então prova ae</div>
+                <div class="message-time">10:20</div>
+            </div>
+            
+            <div class="message sent">
+                <div class="message-content">
+                    <img class="message-image" src="https://i.pinimg.com/736x/4f/3b/bc/4f3bbc413c8e9cdd9afd3dfd6e5d3fa2.jpg" alt="Prova resolvida">
+                    <div class="image-caption">🔥Daniel está com uma streak de 5 dias de treino🔥</div>
+                    <p>toma</p>
+                </div>
+                <div class="message-time">10:22</div>
+            </div>
+            
+            <div class="message received">
+                <div class="message-content">
+                    Brabo
+                </div>
+                <div class="message-time">10:23</div>
+            </div>
+        </div>
+        
+        <!-- Área de entrada de mensagem -->
+        <div class="input-container">
+            <input type="text" class="message-input" placeholder="Digite uma mensagem...">
+            <button class="send-btn" id="send-btn">
+                <span class="material-symbols-outlined">send</span>
+            </button>
+        </div>
+        
+        <!-- Painel de informações -->
+        <div class="info-panel" id="info-panel">
+            <div class="info-header">
+                <div class="info-title">Informações do Grupo</div>
+                <button class="close-btn" id="close-btn">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            
+            <div class="group-info">
+                <div class="group-name">Grupo da Classe</div>
+                <p>Grupo para focar na academia💪</p>
+            </div>
+            
+            <!-- Nova seção de Prêmio -->
+            <div class="premio-section">
+                <div class="premio-title">Competição Mensal</div>
+                <div class="premio-desc">
+                    Quem ganhar mais pontos até o fim do mês, vai ganhar um lanche no MC Donald's de 
+                    <span class="premio-valor">até R$ 60,00</span>
+                </div>
+            </div>
+            
+            <div class="participants">
+                <h3>Participantes (5)</h3>
+                <ul class="participants-list">
+                    <li class="participant-item">
+                        <div class="participant-info">
+                            <div class="participant-avatar">DY</div>
+                            <div class="participant-name">Daniel Yukio</div>
+                        </div>
+                        <div class="participant-points">10 pontos</div>
+                    </li>
+                    <li class="participant-item">
+                        <div class="participant-info">
+                            <div class="participant-avatar">GH</div>
+                            <div class="participant-name">Guillermo Henrique</div>
+                        </div>
+                        <div class="participant-points">9 pontos</div>
+                    </li>
+                    <li class="participant-item">
+                        <div class="participant-info">
+                            <div class="participant-avatar">LA</div>
+                            <div class="participant-name">Letícia Alves</div>
+                        </div>
+                        <div class="participant-points">11 pontos</div>
+                    </li>
+                    <li class="participant-item">
+                        <div class="participant-info">
+                            <div class="participant-avatar">ME</div>
+                            <div class="participant-name">Maria Eduarda</div>
+                        </div>
+                        <div class="participant-points">10 pontos</div>
+                    </li>
+                    <li class="participant-item">
+                        <div class="participant-info">
+                            <div class="participant-avatar">SR</div>
+                            <div class="participant-name">Sophia Ramos</div>
+                        </div>
+                        <div class="participant-points">9 pontos</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Overlay -->
+        <div class="overlay" id="overlay"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const infoBtn = document.getElementById('info-btn');
+            const closeBtn = document.getElementById('close-btn');
+            const infoPanel = document.getElementById('info-panel');
+            const overlay = document.getElementById('overlay');
+            const sendBtn = document.getElementById('send-btn');
+            const messageInput = document.querySelector('.message-input');
+            
+            // Abrir painel de informações
+            infoBtn.addEventListener('click', function() {
+                infoPanel.classList.add('active');
+                overlay.classList.add('active');
+            });
+            
+            // Fechar painel de informações
+            closeBtn.addEventListener('click', function() {
+                infoPanel.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+            
+            // Fechar ao clicar no overlay
+            overlay.addEventListener('click', function() {
+                infoPanel.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+            
+            // Enviar mensagem
+            sendBtn.addEventListener('click', function() {
+                if (messageInput.value.trim() !== '') {
+                    alert('Esta é apenas uma demonstração. A mensagem não pode ser enviada.');
+                    messageInput.value = '';
+                }
+            });
+            
+            // Enviar com Enter
+            messageInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendBtn.click();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

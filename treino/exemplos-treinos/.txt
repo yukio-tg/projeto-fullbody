@@ -1,17 +1,484 @@
-<!DOCTYPE html>
+"Como especialista em engenharia de software, desenvolva um código para um website que simule a formatação e exibição de um aplicativo smartphone.  
+Aqui estão os detalhes”
+- **Funcionalidades:**
+    - O site deve conter tom vermelho como cor primária e cor cinza-escura como subtom
+    - O site deve estar prestando o serviço de um chat, portanto crie 2 - 3 mensagens demonstrativas em balões de texto. Abaixo deve haver uma área para escrever e enviar as mensagens.
+    - Ao canto superior direito, deve haver um botão para exibir uma aba que demonstre algumas informações cruciais: participantes do grupo, nome do grupo.
+- **Tecnologias/Linguagem:** HTML, CSS, JS
+- **Restrições:**
+    - Não é necessário interação com um backend, por ser apenas uma demonstração. Em caso do usuário clicar em "enviar mensagem", o site deve enviar um alert dizendo que está parte é apenas uma demonstração, portanto a mensagem não pode ser enviada.
+    - Siga os mesmos modelo de nossas outras iterações, seguindo o mesmo formato do site abaixo.
+- **Contexto Adicional:** Utilize os symbols providenciados pela google para ícones.
+- **Pré-código Existente:** modelo de outras abas do mesmo site: 
+
+    <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu de Refeições - Planejador Nutricional</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="dietas.css">
+    <style>
+:root {
+    /* Device Screensize - Foco Mobile First */
+    --width-mobile: 100%;
+    --width-tablet: 768px;
+    --width-laptop: 1024px;
+    --width-desktop: 1200px;
+    --width-actual: var(--width-mobile);
+    
+    /* Cores principais - Modo Noturno Atualizado */
+    --primary-color: #6a8dff;
+    --primary-dark: #5a7ce6;
+    --primary-darker: #4a6bcc;
+    --secondary-color: #1a1f2d;
+    --accent-color: #8a6bff;
+    --gradient-bg: #0a0a0a;
+    --header-gradient: linear-gradient(135deg, #1a5f2a, #28a745, #3cb371);
+    
+    /* Cores de texto - Modo Noturno */
+    --text-primary: #e0e0e0;
+    --text-secondary: #f0f0f0;
+    --text-light: #a0a0a0;
+    --text-white: #ffffff;
+    
+    /* Cores de macros */
+    --carbs-color: #6b8cff;
+    --protein-color: #ff6b6b;
+    --fat-color: #ffb86b;
+    --calories-color: #6bff8c;
+    
+    /* Cores de fundo - Modo Noturno */
+    --bg-white: #1a1a1a;
+    --bg-light: #252525;
+    --bg-lighter: #2d2d2d;
+    --bg-gradient-light: linear-gradient(135deg, #252525, #1e1e1e);
+    
+    /* Sombras - Mais escuras para contraste */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.25);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2);
+    
+    /* Bordas */
+    --border-radius-sm: 8px;
+    --border-radius-md: 12px;
+    --border-radius-lg: 16px;
+    --border-color: #333333;
+    
+    /* Espaçamentos (otimizados para mobile) */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 12px;
+    --space-lg: 16px;
+    --space-xl: 20px;
+    --space-xxl: 24px;
+    
+    /* Tamanhos de fonte (otimizados para mobile) */
+    --text-xs: 0.75rem;
+    --text-sm: 0.875rem;
+    --text-md: 1rem;
+    --text-lg: 1.125rem;
+    --text-xl: 1.25rem;
+    --text-xxl: 1.5rem;
+    --text-xxxl: 1.75rem;
+    --text-display: 2rem;
+    
+    /* Outros */
+    --max-width: 100%;
+    --card-min-width: 140px;
+    --meal-card-min-width: 100%;
+    --blur-effect: blur(10px);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--gradient-bg);
+    color: var(--text-primary);
+    line-height: 1.5;
+    min-height: 100vh;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+div.fundo {
+    margin: 0 auto;
+    max-width: var(--width-actual);
+    background: var(--gradient-bg);
+    min-height: 100vh;
+}
+
+.container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    background: rgba(30, 30, 30, 0.95);
+    border-radius: 0;
+    box-shadow: none;
+    overflow: hidden;
+}
+
+/* Header melhorado */
+.header {
+    background: var(--header-gradient);
+    color: var(--text-white);
+    padding: var(--space-xl);
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: var(--shadow-md);
+}
+
+.header h1 {
+    font-size: var(--text-display);
+    margin-bottom: var(--space-sm);
+    font-weight: 700;
+}
+
+.header p {
+    font-size: var(--text-lg);
+    opacity: 0.9;
+}
+
+/* Cards de resumo */
+.summary-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    background: var(--bg-light);
+}
+
+.summary-card {
+    background: var(--bg-white);
+    padding: var(--space-md);
+    border-radius: var(--border-radius-md);
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    border: 1px solid var(--border-color);
+}
+
+.summary-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.summary-card h3 {
+    color: var(--text-secondary);
+    margin-bottom: var(--space-xs);
+    font-size: var(--text-sm);
+}
+
+.summary-value {
+    font-size: var(--text-xxl);
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: var(--space-xs);
+}
+
+.summary-unit {
+    color: var(--text-light);
+    font-size: var(--text-xs);
+}
+
+/* Grid de refeições */
+.meals-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    padding: var(--space-lg);
+}
+
+.meal-card {
+    background: var(--bg-white);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    transition: var(--transition);
+    border: 1px solid var(--border-color);
+}
+
+.meal-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.meal-header {
+    padding: var(--space-lg);
+    border-bottom: 2px solid var(--border-color);
+    background: var(--bg-lighter);
+}
+
+.meal-title {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-md);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.meal-icon {
+    font-size: var(--text-xxl);
+}
+
+.meal-targets {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+}
+
+.target-item {
+    background: var(--bg-light);
+    padding: var(--space-sm);
+    border-radius: var(--border-radius-sm);
+    text-align: center;
+    border: 1px solid var(--border-color);
+}
+
+.target-label {
+    font-size: var(--text-xs);
+    color: var(--text-light);
+    margin-bottom: var(--space-xs);
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.target-value {
+    font-size: var(--text-md);
+    font-weight: bold;
+    color: var(--text-secondary);
+}
+
+.foods-list {
+    padding: 0 var(--space-lg) var(--space-lg);
+}
+
+.food-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-md) 0;
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color var(--transition);
+}
+
+.food-item:hover {
+    background-color: var(--bg-light);
+    margin: 0 calc(-1 * var(--space-md));
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
+    border-radius: var(--border-radius-sm);
+}
+
+.food-item:last-child {
+    border-bottom: none;
+}
+
+.food-info {
+    flex: 1;
+}
+
+.food-name {
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-xs);
+    font-size: var(--text-md);
+}
+
+.food-portion {
+    font-size: var(--text-xs);
+    color: var(--text-light);
+}
+
+.food-macros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    font-size: var(--text-xs);
+    margin-top: var(--space-xs);
+}
+
+.macro {
+    color: var(--text-light);
+}
+
+.macro.carbs { color: var(--carbs-color); }
+.macro.protein { color: var(--protein-color); }
+.macro.fat { color: var(--fat-color); }
+
+.food-calories {
+    font-weight: bold;
+    color: var(--calories-color);
+    font-size: var(--text-md);
+    flex-shrink: 0;
+    margin-left: var(--space-sm);
+}
+
+.meal-totals {
+    background: var(--bg-gradient-light);
+    padding: var(--space-md);
+    border-top: 2px solid var(--border-color);
+}
+
+.totals-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-sm);
+    text-align: center;
+    margin-bottom: var(--space-md);
+}
+
+.total-item {
+    background: var(--bg-white);
+    padding: var(--space-sm);
+    border-radius: var(--border-radius-sm);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color);
+}
+
+.total-label {
+    font-size: var(--text-xs);
+    color: var(--text-light);
+    margin-bottom: var(--space-xs);
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.total-value {
+    font-size: var(--text-lg);
+    font-weight: bold;
+}
+
+.total-value.calories { color: var(--calories-color); }
+.total-value.carbs { color: var(--carbs-color); }
+.total-value.protein { color: var(--protein-color); }
+.total-value.fat { color: var(--fat-color); }
+
+.add-food-btn {
+    width: 100%;
+    padding: var(--space-md);
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: var(--text-white);
+    border: none;
+    border-radius: var(--border-radius-sm);
+    font-size: var(--text-md);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+}
+
+.add-food-btn:hover {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-darker));
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(106, 141, 255, 0.3);
+}
+
+.progress-bar {
+    width: 100%;
+    height: 4px;
+    background: var(--bg-lighter);
+    border-radius: 2px;
+    margin-top: var(--space-xs);
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width var(--transition);
+}
+
+.progress-fill.calories { background: linear-gradient(90deg, var(--calories-color), #4dff7a); }
+.progress-fill.carbs { background: linear-gradient(90deg, var(--carbs-color), var(--primary-dark)); }
+.progress-fill.protein { background: linear-gradient(90deg, var(--protein-color), #ff4d4d); }
+.progress-fill.fat { background: linear-gradient(90deg, var(--fat-color), #ff9e4d); }
+
+/* Melhorias para telas maiores */
+@media (min-width: 768px) {
+    div.fundo {
+        max-width: 500px;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+        min-height: 100vh;
+    }
+    
+    .summary-cards {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .totals-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.meal-card {
+    animation: fadeIn 0.5s ease-out;
+}
+
+.meal-card:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.meal-card:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.meal-card:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+/* Melhorias de acessibilidade */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Efeitos de toque para mobile */
+@media (max-width: 768px) {
+    .meal-card:active {
+        transform: scale(0.98);
+    }
+    
+    .add-food-btn:active {
+        transform: scale(0.98);
+    }
+}
+</style>
 </head>
 <body>
     <div class="fundo">
         <div class="container">
             <div class="header">
-                <h1>Planejador Nutricional</h1>
+                <h1>🍽️ Planejador Nutricional</h1>
                 <p>Controle suas refeições e macronutrientes diários</p>
             </div>
             <div class="summary-cards">
@@ -40,7 +507,7 @@
                 <div class="meal-card">
                     <div class="meal-header">
                         <div class="meal-title">
-                            <span class="meal-icon"></span>
+                            <span class="meal-icon">🌅</span>
                             Café da Manhã
                         </div>
                         <div class="meal-targets">
@@ -144,7 +611,7 @@
                 <div class="meal-card">
                     <div class="meal-header">
                         <div class="meal-title">
-                            <span class="meal-icon"></span>
+                            <span class="meal-icon">🍽️</span>
                             Almoço
                         </div>
                         <div class="meal-targets">
@@ -272,3 +739,7 @@
     </script>
 </body>
 </html>
+
+- - -
+
+Forneça um plano inicial antes do código e siga a estrutura de análise detalhada."

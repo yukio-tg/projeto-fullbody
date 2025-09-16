@@ -1,12 +1,20 @@
+
 :root {
+    /* Device Screensize - Foco em mobile */
+    --width-mobile: 100%;
+    --width-tablet: 768px;
+    --width-laptop: 1024px;
+    --width-desktop: 1200px;
+    --width-actual: var(--width-mobile);
+    
     /* Cores principais - Modo Noturno */
     --primary-color: #6a8dff;
     --primary-dark: #5a7ce6;
     --primary-darker: #4a6bcc;
     --secondary-color: #1a1f2d;
     --accent-color: #8a6bff;
-    --gradient-bg: black;
-    --header-gradient: linear-gradient(135deg, var(--secondary-color), #2c3e50);
+    --gradient-bg: #0a0a0a;
+    --header-gradient: linear-gradient(135deg, #1a5f2a, #28a745, #3cb371);
     
     /* Cores de texto - Modo Noturno */
     --text-primary: #e0e0e0;
@@ -14,53 +22,42 @@
     --text-light: #a0a0a0;
     --text-white: #ffffff;
     
-    /* Cores de macros */
-    --carbs-color: #6b8cff;
-    --protein-color: #ff6b6b;
-    --fat-color: #ffb86b;
-    --calories-color: #6bff8c;
-    
     /* Cores de fundo - Modo Noturno */
-    --bg-white: #1e1e1e;
+    --bg-white: #1a1a1a;
     --bg-light: #252525;
-    --bg-light-green: rgb(26, 65, 26);
+    --bg-light-green: rgba(26, 65, 26, 0.7);
     --bg-lighter: #2d2d2d;
-    --bg-gradient-light: linear-gradient(135deg, #252525, #1e1e1e);
     
     /* Sombras - Mais escuras para contraste */
-    --shadow-sm: 0 5px 15px rgba(0, 0, 0, 0.3);
-    --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.25);
-    --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.2);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.25);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2);
     
     /* Bordas */
     --border-radius-sm: 8px;
-    --border-radius-md: 15px;
-    --border-radius-lg: 20px;
+    --border-radius-md: 12px;
+    --border-radius-lg: 16px;
     --border-color: #333333;
     
-    /* Espaçamentos (mantidos os mesmos) */
-    --space-xs: 5px;
-    --space-sm: 10px;
-    --space-md: 15px;
-    --space-lg: 20px;
-    --space-xl: 25px;
-    --space-xxl: 30px;
+    /* Espaçamentos (otimizados para mobile) */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 12px;
+    --space-lg: 16px;
+    --space-xl: 20px;
+    --space-xxl: 24px;
     
-    /* Tamanhos de fonte (mantidos os mesmos) */
-    --text-xs: 0.8rem;
-    --text-sm: 0.9rem;
+    /* Tamanhos de fonte (otimizados para mobile) */
+    --text-xs: 0.75rem;
+    --text-sm: 0.875rem;
     --text-md: 1rem;
-    --text-lg: 1.1rem;
-    --text-xl: 1.2rem;
-    --text-xxl: 1.4rem;
-    --text-xxxl: 1.5rem;
-    --text-display: 2.5rem;
+    --text-lg: 1.125rem;
+    --text-xl: 1.25rem;
+    --text-xxl: 1.5rem;
+    --text-xxxl: 1.75rem;
+    --text-display: 2rem;
     
     /* Outros */
-    --max-width: 1400px;
-    --card-min-width: 200px;
-    --meal-card-min-width: 320px;
-    --blur-effect: blur(10px);
     --transition: all 0.3s ease;
 }
 
@@ -68,91 +65,232 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
     background: var(--gradient-bg);
     color: var(--text-primary);
-    line-height: 1.6;
+    line-height: 1.5;
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
+div.fundo {
+    margin: 0 auto;
+    max-width: var(--width-actual);
+    background: var(--gradient-bg);
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Header melhorado */
 header {
     background: var(--header-gradient);
     color: var(--text-white);
     text-align: center;
+    padding: var(--space-xl);
     box-shadow: var(--shadow-md);
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
 header h1 {
     font-size: var(--text-display);
-    margin-bottom: var(--space-sm);
+    margin-bottom: var(--space-xs);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
+/* Container principal */
+main {
+    padding: var(--space-md);
+}
+
+/* Seções de treino - layout mobile first */
 section {
-    width: 90vw;
-    height: 20vh;
+    width: 100%;
+    min-height: 100px;
     background-color: var(--bg-lighter);
     padding: var(--space-md);
-    margin: var(--space-lg) auto;
+    margin-bottom: var(--space-lg);
     display: flex;
     border-radius: var(--border-radius-md);
-    border: 1px solid black;
+    border: 1px solid var(--border-color);
     cursor: pointer;
-}
-
-section:hover{
-    box-shadow: var(--shadow-lg);
-    transform: scale(1.02);
     transition: var(--transition);
-    border: 1px solid var(--primary-color);
-    background-color: var(--bg-gradient-light);
+    position: relative;
+    overflow: hidden;
 }
 
-section.treino-feito{
+section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--header-gradient);
+    opacity: 0;
+    transition: var(--transition);
+}
+
+section:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-3px);
+    background-color: var(--bg-light);
+}
+
+section:hover::before {
+    opacity: 1;
+}
+
+section.treino-feito {
     background: var(--bg-light-green);
+    border: 1px solid rgba(72, 187, 120, 0.3);
 }
 
-section.treino-feito:hover{
-    box-shadow: var(--shadow-lg);
-    transform: scale(1.02);
-    transition: var(--transition);
-    border: 2px solid var(--bg-light-green);
-    background-color: var(--bg-gradient-light);
+section.treino-feito:hover {
+    border: 1px solid #48bb78;
+    background: linear-gradient(to right, var(--bg-light-green), rgba(26, 65, 26, 0.5));
 }
 
-section img{
-    width: auto;
-    height: 15vh;
-    border-radius: var(--border-radius-md);
-    margin-right: 10px;
+section img {
+    width: 80px;
+    height: 80px;
+    border-radius: var(--border-radius-sm);
+    margin-right: var(--space-md);
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 2px solid var(--border-color);
 }
-section h1 , section p{
-    display: block;
+
+section .text {
     flex: 1;
-    padding-left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+section h1 {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-xs);
+    color: var(--text-secondary);
+}
+
+section p.subtitulo {
+    font-style: italic;
+    color: var(--text-light);
+    font-size: var(--text-sm);
     margin-bottom: var(--space-xs);
 }
 
-section p.subtitulo{
-    font-style: italic;
-}
-
-section p.data{
-    font-size: var(--text-sm);
+section p.data {
+    font-size: var(--text-xs);
     color: var(--text-light);
 }
 
-section.criar-novos{
+section.criar-novos {
     justify-content: center;
     align-items: center;
-    font-size: var(--text-xl);
+    font-size: var(--text-lg);
     font-weight: bold;
     color: var(--text-white);
     border: 2px dashed var(--border-color);
+    background: rgba(42, 42, 42, 0.5);
+    flex-direction: column;
+    gap: var(--space-sm);
 }
 
-section.criar-novos h1{
-    text-align: center;
+section.criar-novos:hover {
+    background: rgba(42, 42, 42, 0.7);
+    border: 2px dashed var(--primary-color);
+}
+
+section.criar-novos .material-symbols-outlined {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+}
+
+/* Links como blocos */
+a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+/* Efeitos de toque para mobile */
+@media (max-width: 768px) {
+    section:active {
+        transform: scale(0.98);
+    }
+    
+    header h1 {
+        font-size: var(--text-xxl);
+    }
+    
+    section img {
+        width: 70px;
+        height: 70px;
+    }
+    
+    section h1 {
+        font-size: var(--text-lg);
+    }
+}
+
+/* Melhorias para telas maiores */
+@media (min-width: 769px) {
+    div.fundo {
+        max-width: 500px;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+        min-height: 100vh;
+    }
+}
+
+/* Adicionando uma animação sutil para as sections */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+section {
+    animation: fadeIn 0.4s ease-out;
+}
+
+section:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+section:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+section:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+/* Scroll personalizado */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-light);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-dark);
 }
