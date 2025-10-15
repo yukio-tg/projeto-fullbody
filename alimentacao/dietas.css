@@ -8,12 +8,12 @@
     --width-actual: var(--width-mobile);
     
     /* Cores principais - Modo Noturno Atualizado */
-    --primary-color: #6a8dff;
-    --primary-dark: #5a7ce6;
-    --primary-darker: #4a6bcc;
-    --secondary-color: #1a1f2d;
-    --accent-color: #8a6bff;
-    --gradient-bg: #0a0a0a;
+    --primary-color: #6e90a1;
+    --primary-light: #96C3D9;
+    --primary-dark: #546E7A;
+    --secondary-color: #2c2c2e;
+    --secondary-light: #3c3c3e;
+    --secondary-dark: #1c1c1e;
     --header-gradient: linear-gradient(135deg, var(--primary-color), var(--primary-dark), var(--accent-color));
     
     /* Cores de texto - Modo Noturno */
@@ -32,7 +32,6 @@
     --bg-white: #1a1a1a;
     --bg-light: #252525;
     --bg-lighter: #2d2d2d;
-    --bg-gradient-light: linear-gradient(135deg, #252525, #1e1e1e);
     
     /* Sombras - Mais escuras para contraste */
     --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
@@ -80,7 +79,7 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: var(--gradient-bg);
+    background: black;
     color: var(--text-primary);
     line-height: 1.5;
     min-height: 100vh;
@@ -106,7 +105,7 @@ div.fundo {
 
 /* Header melhorado */
 .header {
-    background: var(--header-gradient);
+    background: var(--primary-color);
     color: var(--text-white);
     padding: var(--space-xl);
     text-align: center;

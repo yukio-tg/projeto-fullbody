@@ -1,44 +1,54 @@
-
 :root {
+    /* Tons base */
+    --tom-base-brilho: #ACE1FA;
+    --tom-base-claro: #96C3D9;
+    --tom-base-mid-claro: #6e90a1;
+    --tom-base: #546E7A;
+    --tom-base-escuro: #4F6773;
+    --tom-base-sombrio: #37474F;
+    --tom-base-megaescuro: #121d22;
+
     /* Device Screensize - Foco em mobile */
     --width-mobile: 100%;
     --width-tablet: 768px;
     --width-laptop: 1024px;
     --width-desktop: 1200px;
     --width-actual: var(--width-mobile);
-    
-    /* Cores principais - Modo Noturno */
-    --primary-color: #6a8dff;
-    --primary-dark: #5a7ce6;
-    --primary-darker: #4a6bcc;
-    --secondary-color: #1a1f2d;
-    --accent-color: #8a6bff;
-    --gradient-bg: #0a0a0a;
-    --header-gradient: linear-gradient(135deg, #1a5f2a, #28a745, #3cb371);
-    
+
+    /* Cores principais - Tom majoritário */
+    --primary-color: var(--tom-base-brilho);
+    --primary-dark: var(--tom-base-escuro);
+    --primary-darker: var(--tom-base-sombrio);
+    --secondary-color: var(--tom-base);
+    --accent-color: var(--tom-sub-claro);
+    --gradient-bg: var(--tom-base-sombrio);
+    --header-gradient: linear-gradient(135deg, var(--tom-base-brilho), var(--tom-base-claro), var(--tom-base));
+    --border-color: white;
+
     /* Cores de texto - Modo Noturno */
-    --text-primary: #e0e0e0;
-    --text-secondary: #f0f0f0;
-    --text-light: #a0a0a0;
+    --text-primary: var(--text-white);
+    --text-secondary: var(--text-white);
+    --text-light: var(--text-white);
     --text-white: #ffffff;
-    
+
     /* Cores de fundo - Modo Noturno */
-    --bg-white: #1a1a1a;
-    --bg-light: #252525;
-    --bg-light-green: rgba(26, 65, 26, 0.7);
-    --bg-lighter: #2d2d2d;
-    
+    --bg-white: var(--tom-base-claro);
+    --bg-body: black;
+    --bg-dark: #1c1c1c;
+    --bg-light: var(--tom-base);
+    --bg-done: rgba(125, 163, 181, 0.7); /* tom-base-brilho com transparência */
+    --bg-lighter: var(--tom-base-escuro);
+
     /* Sombras - Mais escuras para contraste */
-    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
-    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.25);
-    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2);
-    
+    --shadow-sm: 0 2px 8px rgba(44, 58, 64, 0.3); /* tom-base-sombrio */
+    --shadow-md: 0 4px 12px rgba(44, 58, 64, 0.25);
+    --shadow-lg: 0 8px 24px rgba(44, 58, 64, 0.2);
+
     /* Bordas */
     --border-radius-sm: 8px;
     --border-radius-md: 12px;
     --border-radius-lg: 16px;
-    --border-color: #333333;
-    
+
     /* Espaçamentos (otimizados para mobile) */
     --space-xs: 4px;
     --space-sm: 8px;
@@ -46,7 +56,7 @@
     --space-lg: 16px;
     --space-xl: 20px;
     --space-xxl: 24px;
-    
+
     /* Tamanhos de fonte (otimizados para mobile) */
     --text-xs: 0.75rem;
     --text-sm: 0.875rem;
@@ -56,7 +66,7 @@
     --text-xxl: 1.5rem;
     --text-xxxl: 1.75rem;
     --text-display: 2rem;
-    
+
     /* Outros */
     --transition: all 0.3s ease;
 }
@@ -64,13 +74,12 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
 }
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-    background: var(--gradient-bg);
+    background: var(--bg-body);
     color: var(--text-primary);
     line-height: 1.5;
     min-height: 100vh;
@@ -80,18 +89,20 @@ body {
 div.fundo {
     margin: 0 auto;
     max-width: var(--width-actual);
-    background: var(--gradient-bg);
+    background: var(--bg-dark);
     min-height: 100vh;
     position: relative;
+    /* Remove overflow-x: hidden to allow sticky header to work */
 }
 
 /* Header melhorado */
 header {
-    background: var(--header-gradient);
+    background-color: var(--tom-base);
     color: var(--text-white);
     text-align: center;
     padding: var(--space-xl);
     box-shadow: var(--shadow-md);
+    position: -webkit-sticky;
     position: sticky;
     top: 0;
     z-index: 10;
@@ -100,28 +111,32 @@ header {
 header h1 {
     font-size: var(--text-display);
     margin-bottom: var(--space-xs);
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    text-shadow: 1px 1px 3px rgba(44, 58, 64, 0.3); /* tom-base-sombrio */
 }
 
 /* Container principal */
 main {
     padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    max-width: 450px;
+    min-width: fit-content;
 }
 
 /* Seções de treino - layout mobile first */
 section {
     width: 100%;
     min-height: 100px;
-    background-color: var(--bg-lighter);
+    background-color: var(--tom-base-escuro);
     padding: var(--space-md);
     margin-bottom: var(--space-lg);
     display: flex;
     border-radius: var(--border-radius-md);
-    border: 1px solid var(--border-color);
     cursor: pointer;
     transition: var(--transition);
     position: relative;
     overflow: hidden;
+    animation: fadeIn 0.4s ease-out;
 }
 
 section::before {
@@ -139,21 +154,11 @@ section::before {
 section:hover {
     box-shadow: var(--shadow-lg);
     transform: translateY(-3px);
-    background-color: var(--bg-light);
+    background-color: var(--tom-base-mid-claro);
 }
 
 section:hover::before {
     opacity: 1;
-}
-
-section.treino-feito {
-    background: var(--bg-light-green);
-    border: 1px solid rgba(72, 187, 120, 0.3);
-}
-
-section.treino-feito:hover {
-    border: 1px solid #48bb78;
-    background: linear-gradient(to right, var(--bg-light-green), rgba(26, 65, 26, 0.5));
 }
 
 section img {
@@ -176,12 +181,12 @@ section .text {
 section h1 {
     font-size: var(--text-xl);
     margin-bottom: var(--space-xs);
-    color: var(--text-secondary);
+    color: var(--text-white);
 }
 
 section p.subtitulo {
     font-style: italic;
-    color: var(--text-light);
+    color: var(--text-secondary);
     font-size: var(--text-sm);
     margin-bottom: var(--space-xs);
 }
@@ -191,26 +196,39 @@ section p.data {
     color: var(--text-light);
 }
 
+section.treino-incompleto {
+    background: linear-gradient(to right, var(--tom-base-sombrio), var(--tom-base-megaescuro));
+}
+
+section.treino-incompleto:hover {
+    box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.5); /* tom-base-megaescuro */
+    background: var(--tom-base);
+}
+
 section.criar-novos {
     justify-content: center;
     align-items: center;
     font-size: var(--text-lg);
     font-weight: bold;
-    color: var(--text-white);
+    color: var(--accent-color);
     border: 2px dashed var(--border-color);
-    background: rgba(42, 42, 42, 0.5);
     flex-direction: column;
+    background: black;
     gap: var(--space-sm);
 }
 
 section.criar-novos:hover {
-    background: rgba(42, 42, 42, 0.7);
-    border: 2px dashed var(--primary-color);
+    background: linear-gradient(to top, var(--tom-base-megaescuro) 75%, var(--tom-base-escuro) 100%);
+    border: 2px dashed var(--border-color);
+}
+
+section.criar-novos:hover .material-symbols-outlined, section.criar-novos:hover h1{
+    text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.3); /* tom-base-sombrio */
 }
 
 section.criar-novos .material-symbols-outlined {
     font-size: 2.5rem;
-    color: var(--primary-color);
+    color: white;
 }
 
 /* Links como blocos */
@@ -225,18 +243,36 @@ a {
     section:active {
         transform: scale(0.98);
     }
-    
+
+    /* Ajuste para melhor adaptação vertical em telas pequenas */
+    section {
+        min-height: 70px;
+        padding: var(--space-sm) var(--space-xs);
+    }
+
+    section img {
+        width: 55px;
+        height: 55px;
+        margin-right: var(--space-sm);
+    }
+
+    section h1 {
+        font-size: var(--text-md);
+    }
+
+    section .text {
+        /* Reduz espaçamento interno */
+        gap: 2px;
+    }
+
+    section p.subtitulo,
+    section p.data {
+        font-size: var(--text-xs);
+        margin-bottom: 0;
+    }
+
     header h1 {
         font-size: var(--text-xxl);
-    }
-    
-    section img {
-        width: 70px;
-        height: 70px;
-    }
-    
-    section h1 {
-        font-size: var(--text-lg);
     }
 }
 
@@ -244,7 +280,7 @@ a {
 @media (min-width: 769px) {
     div.fundo {
         max-width: 500px;
-        box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 0 30px rgba(44, 58, 64, 0.3); /* tom-base-sombrio */
         min-height: 100vh;
     }
 }

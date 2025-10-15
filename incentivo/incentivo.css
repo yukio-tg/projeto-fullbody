@@ -1,8 +1,8 @@
 :root {
             /* Cores principais - Esquema Vermelho/Cinza */
-            --primary-color: #c7403e;
-            --primary-light: #e7504d;
-            --primary-dark: #a72f2d;
+            --primary-color: #6e90a1;
+            --primary-light: #96C3D9;
+            --primary-dark: #546E7A;
             --secondary-color: #2c2c2e;
             --secondary-light: #3c3c3e;
             --secondary-dark: #1c1c1e;
@@ -174,8 +174,8 @@
         }
 
         .message-image:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 40px 10px rgba(0,0,0,0.7);
+            transform: scale(1.01);
+            box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.226);
             z-index: 999;
             position: relative;
         }
@@ -194,7 +194,6 @@
 
         .image-caption {
             font-size: var(--text-sm);
-            color: var(--text-light);
             margin-top: var(--space-xs);
             font-style: italic;
             padding: 0 var(--space-xs);
@@ -303,7 +302,7 @@
 
         /* Nova seção de prêmio */
         .premio-section {
-            background: linear-gradient(135deg, #ffcc00 0%, #ff9900 100%);
+            background: white;
             color: #2c2c2e;
             padding: var(--space-lg);
             border-radius: var(--border-radius-md);
@@ -338,8 +337,7 @@
 
         .premio-valor {
             display: inline-block;
-            background-color: #c7403e;
-            color: white;
+            background-color: var(--primary-light);
             padding: 4px 8px;
             border-radius: 12px;
             font-weight: 700;
@@ -374,6 +372,8 @@
             align-items: center;
             justify-content: center;
             font-weight: 600;
+            border: 1px solid #fff;
+            box-sizing: border-box;
         }
 
         .participant-name {
@@ -390,6 +390,8 @@
             display: flex;
             align-items: center;
             gap: 4px;
+            border: 1px solid #fff;
+            box-sizing: border-box;
         }
 
         .participant-points::before {

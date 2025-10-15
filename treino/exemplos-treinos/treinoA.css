@@ -8,18 +8,14 @@
             --width-actual: var(--width-mobile);
             
             /* Cores principais - Modo Noturno */
-            --primary-color: #6a8dff;
-            --primary-dark: #5a7ce6;
-            --primary-darker: #4a6bcc;
-            --secondary-color: #1a1f2d;
+            --primary-color: #6e90a1;
+            --primary-light: #96C3D9;
+            --primary-dark: #546E7A;
+            --secondary-color: #2c2c2e;
+            --secondary-light: #3c3c3e;
+            --secondary-dark: #1c1c1e;
             --accent-color: #8a6bff;
             --gradient-bg: #0a0a0a;
-            
-            /* Novas cores para o gradiente verde */
-            --green-gradient-1: #1a5f2a;
-            --green-gradient-2: #006115;
-            --green-gradient-3: #083111;
-            --green-gradient-4: #0e270c;
             
             /* Cores de texto - Modo Noturno */
             --text-primary: #e0e0e0;
@@ -30,7 +26,6 @@
             /* Cores de fundo - Modo Noturno */
             --bg-white: #1a1a1a;
             --bg-light: #252525;
-            --bg-light-green: rgba(26, 65, 26, 0.7);
             --bg-lighter: #2d2d2d;
             
             /* Sombras - Mais escuras para contraste */
@@ -42,7 +37,7 @@
             --border-radius-sm: 8px;
             --border-radius-md: 12px;
             --border-radius-lg: 16px;
-            --border-color: #333333;
+            --border-color: #ffffff00;
             
             /* Espaçamentos (otimizados para mobile) */
             --space-xs: 4px;
@@ -94,11 +89,7 @@
 
         /* Header melhorado */
         header {
-            background: linear-gradient(135deg, 
-                var(--green-gradient-1) 0%, 
-                var(--green-gradient-2) 30%, 
-                var(--green-gradient-3) 70%, 
-                var(--green-gradient-4) 100%);
+            background-color: var(--primary-color);
             text-align: center;
             min-height: 80px;
             box-shadow: var(--shadow-md);
@@ -152,7 +143,7 @@
         div.bloco-lado p.subtitulo {
             margin-top: 0;
             font-size: var(--text-sm);
-            color: var(--text-light);
+            color: var(--text-display);
             font-style: italic;
         }
 
@@ -207,7 +198,7 @@
 
         .checkbox-space:hover {
             box-shadow: 0 0 4px rgba(255, 255, 255, 0.7);
-            background-color: rgba(3, 100, 27, 0.3);
+            background-color: var(--primary-dark);;
         }
 
         section.exercise img {
@@ -259,7 +250,6 @@
         }
 
         div.rep:hover {
-            background-color: #333333;
             cursor: pointer;
         }
 
@@ -271,11 +261,12 @@
             width: 36px;
             border-radius: 50%;
             transition: var(--transition);
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
         }
 
         div.icon:hover {
-            box-shadow: 0 0 4px rgba(13, 136, 34, 0.329);
-            background-color: rgba(0, 255, 42, 0.082);
+            background-color: var(--primary-dark);
         }
 
         div.icon svg {
@@ -299,9 +290,7 @@
 
         div.rep h2:hover {
             color: var(--text-white);
-            background-color: #1a1f2d94;
-            font-size: var(--text-lg);
-            border-radius: var(--border-radius-sm);
+            cursor: pointer;
         }
 
         /* Responsive Design */

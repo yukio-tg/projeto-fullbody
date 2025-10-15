@@ -1,0 +1,117 @@
+:root {
+            --screensize-width: var(--screensize-phone-width);
+            --screensize-height: var(--screensize-phone-height);
+
+            --screensize-phone-width: 390px;
+            --screensize-phone-height: 844px;
+            
+            --cor-corpo: #000000;
+            --cor-fundo: #1c1c1c;
+
+            --cor-principal: #546E7A;
+            --cor-secundaria: #4F6773;
+            --cor-terciaria: #6e90a1;
+            --cor-quaternaria: #96C3D9;
+            --cor-quintenaria: #ACE1FA;
+            --cor-texto: white;
+            --cor-texto-secundario: #96C3D9;
+            --cor-texto-terciario: #6e90a1;
+            --cor-borda-secundaria: #555;
+            --cor-sombra: rgba(0, 0, 0, 0.5);
+            --cor-sombra-secundaria: rgba(0, 0, 0, 0.3);
+            --cor-sombra-terciaria: rgba(0, 0, 0, 0.1);
+            --cor-accento: var(--cor-texto);
+        }
+        
+        body, html {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            background-color: var(--cor-corpo);
+            height: 100vh;
+        }
+        .fundo {
+            max-height: var(--screensize-height);
+            max-width: var(--screensize-width);
+            margin: auto;
+            background-color: var(--cor-fundo);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 0 32px var(--cor-sombra);
+        }
+        .container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .aba {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s cubic-bezier(.4,0,.2,1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .aba.ativa {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .iframe-conteudo {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 18px;
+            background: #222;
+            box-shadow: 0 4px 16px var(--cor-sombra-terciaria);
+            overflow: hidden;
+        }
+        .seletor {
+            position: sticky;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            background-color: var(--cor-secundaria);
+            height: 60px;
+            box-shadow: 0 -8px 16px -4px var(--cor-sombra);
+            border-top: 1px solid var(--cor-borda);
+        }
+        .itens-seletor {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 100%;
+        }
+        .opcao-chat, .opcao-dieta, .opcao-treino {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.2s;
+            height: 100%;
+        }
+        .opcao-selecionada {
+            background: var(--cor-terciaria);
+            border-top: 3px solid var(--cor-accento);
+        }
+        span.material-symbols-outlined {
+            font-size: 32px;
+            color: white;
+            transition: color 0.2s;
+        }
